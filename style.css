@@ -1,0 +1,508 @@
+:root {
+    --primary-color: #660099;
+    --hover-color: #4a026f;
+    --text-color: #333;
+    --light-bg: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    background-image: url('../img/campus.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* 添加背景遮罩 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: -1;
+}
+
+/* 顶部工具栏样式 */
+.top-bar {
+    background: var(--light-bg);
+    padding: 5px 0;
+}
+
+.utility-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.utility-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.utility-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* 主标题区域样式 */
+.main-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    border-radius: 50%;
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.school-name h1 {
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.school-name span {
+    font-size: 16px;
+    color: #666;
+}
+
+/* 导航菜单样式 */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav li {
+    position: relative;
+}
+
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* 下拉菜单样式 */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px 20px;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background: var(--light-bg);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 移动端菜单按钮 */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* 移动端菜单 */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background: skyblue;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.close-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .mobile-menu.active {
+        display: block;
+    }
+}
+
+/* 快捷导航按钮样式 */
+.quick-nav-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(to bottom, #000080, #800080);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-nav-toggle:hover {
+    background: linear-gradient(to bottom, #0000a0, #a000a0);
+    transform: scale(1.1);
+}
+
+/* 添加横线容器样式 */
+.menu-lines {
+    width: 24px;
+    height: 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+/* 添加横线样式 */
+.menu-lines span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+/* 当菜单打开时，将横线变为 X */
+.quick-nav-toggle.active .menu-lines span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.quick-nav-toggle.active .menu-lines span:nth-child(2) {
+    opacity: 0;
+}
+
+.quick-nav-toggle.active .menu-lines span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 快捷导航菜单样式 */
+.quick-nav-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(135, 206, 235, 0.9);
+    z-index: 1001;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.quick-nav-menu.active {
+    display: block;
+}
+
+.quick-nav-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding-top: 40px;
+}
+
+.quick-nav-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.quick-nav-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.quick-nav-section ul {
+    list-style: none;
+}
+
+.quick-nav-section a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 0;
+    display: block;
+}
+
+.quick-nav-section a:hover {
+    color: var(--primary-color);
+}
+
+/* 校园风景图片弹窗样式 */
+.campus-image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.campus-image-modal.active {
+    display: flex;
+}
+
+.campus-image-container {
+    max-width: 90%;
+    max-height: 90vh;
+    position: relative;
+}
+
+.campus-image-container img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-image-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* 轮播图样式 */
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    aspect-ratio: 16/9;
+}
+
+.carousel-slides {
+    position: relative;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    position: relative;
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 轮播图指示器样式 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* 轮播图按钮样式 */
+.carousel-button {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.carousel-button.play-pause {
+    top: 20px;
+    right: 80px;
+    transform: none;
+    padding: 12px 16px;
+}
+
+.carousel-button.prev,
+.carousel-button.next {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-button.prev {
+    left: 20px;
+}
+
+.carousel-button.next {
+    right: 20px;
+}
+
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+    left: 20px;
+}
+
+.carousel-button.next {
+    right: 20px;
+}
+
+/* 加载指示器样式 */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 欢迎提示框样式 */
+.welcome-toast {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 18px 36px;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-toast.show {
+    opacity: 1;
+}
+
+/* 彩色文字 */
+.welcome-toast .char1 { color: #FF0000; } /* 赤 */
+.welcome-toast .char2 { color: #FF7F00; } /* 橙 */
+.welcome-toast .char3 { color: #FFFF00; } /* 黄 */
+.welcome-toast .char4 { color: #00FF00; } /* 绿 */
+.welcome-toast .char5 { color: #00FFFF; } /* 青 */
+.welcome-toast .char6 { color: #0000FF; } /* 蓝 */
+.welcome-toast .char7 { color: #8B00FF; } /* 紫 */
+.welcome-toast .char8 { color: #FF69B4; } /* 粉 */
+.welcome-toast .exclamation { color: #722F37; } /* 酒红色 */
+
+.welcome-toast span {
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    margin: 0 2px;
+}
